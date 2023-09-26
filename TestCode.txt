@@ -1,3 +1,139 @@
+-----------------------------------------------------------------------------
+Add Date Feature Finalone
+-----------------
+HTML:
+<div>
+    <!-- Add this input element below the student list in index.html -->
+<label for="attendance-date">Select Date:</label>
+<input type="date" id="attendance-date">
+
+</div>
+
+JS:
+
+// Get a reference to the student list
+const studentList = document.getElementById("student-list");
+
+// This Feature add a No of Present and Absent 
+let presentCount = 0;
+let absentCount = 0;
+const presentCountDisplay = document.getElementById("present-count");
+const absentCountDisplay = document.getElementById("absent-count");
+
+// This Feature Add a Date
+const dateInput = document.getElementById("attendance-date");
+let attendanceData = {}; // Store attendance data for different dates
+
+// Function to update the date when the input changes
+dateInput.addEventListener("change", function () {
+    const selectedDate = dateInput.value;
+    if (!attendanceData[selectedDate]) {
+        attendanceData[selectedDate] = {};
+    }
+});
+
+
+// Add click event listeners to the "Mark" buttons
+const markButtons = document.querySelectorAll(".mark-attendance");
+markButtons.forEach((button) => {
+    button.addEventListener("click", markAttendance);
+});
+
+// Function to mark attendance when the button is clicked
+function markAttendance(event) {
+    const listItem = event.target.parentElement;
+    const studentName = listItem.querySelector(".student-name").textContent;
+
+    const selectedDate = dateInput.value;
+
+    if (!attendanceData[selectedDate]) {
+        attendanceData[selectedDate] = {};
+    }
+
+    const confirmation = confirm(`Mark ${studentName} as present on ${selectedDate}?`);
+    if (confirmation) {
+        // You can add code here to record the attendance, e.g., send data to a server or store it in a local variable.
+        listItem.style.backgroundColor = "#A8DF8E"; // Change background color to indicate attendance marked
+        presentCount++;
+        attendanceData[selectedDate][studentName] = "Present";
+    }else{
+        listItem.style.backgroundColor = "#FF6969"; // Change background color to indicate attendance marked
+        absentCount++;
+        attendanceData[selectedDate][studentName] = "Absent";
+    }
+
+    // Update the counts displayed on the webpage
+    presentCountDisplay.textContent = presentCount;
+    absentCountDisplay.textContent = absentCount;
+
+    //Add a Date Feature
+    // Update the counts displayed on the webpage
+    presentCountDisplay.textContent = countAttendance(selectedDate, "Present");
+    absentCountDisplay.textContent = countAttendance(selectedDate, "Absent");
+
+    // Function to count attendance for a specific date and status
+    function countAttendance(selectedDate, status) {
+        if (attendanceData[selectedDate]) {
+         return Object.values(attendanceData[selectedDate]).filter((value) => value === status).length;
+        }
+    return 0;
+    }
+
+}
+
+
+-----------------------------------------------------------------------------
+Add Date Feature
+-----------------
+// Add these lines at the beginning of script.js
+const dateInput = document.getElementById("attendance-date");
+let attendanceData = {}; // Store attendance data for different dates
+
+// Function to update the date when the input changes
+dateInput.addEventListener("change", function () {
+    const selectedDate = dateInput.value;
+    if (!attendanceData[selectedDate]) {
+        attendanceData[selectedDate] = {};
+    }
+});
+
+// Modify the markAttendance function
+function markAttendance(event) {
+    const listItem = event.target.parentElement;
+    const studentName = listItem.querySelector(".student-name").textContent;
+    const selectedDate = dateInput.value;
+
+    if (!attendanceData[selectedDate]) {
+        attendanceData[selectedDate] = {};
+    }
+
+    const confirmation = confirm(`Mark ${studentName} as present on ${selectedDate}?`);
+    if (confirmation) {
+        // You can add code here to record the attendance, e.g., send data to a server or store it in the attendanceData object.
+        listItem.style.backgroundColor = "#c3e6cb"; // Change background color to indicate attendance marked
+        attendanceData[selectedDate][studentName] = "Present";
+    } else {
+        attendanceData[selectedDate][studentName] = "Absent";
+    }
+
+    // Update the counts displayed on the webpage
+    presentCountDisplay.textContent = countAttendance(selectedDate, "Present");
+    absentCountDisplay.textContent = countAttendance(selectedDate, "Absent");
+}
+
+// Function to count attendance for a specific date and status
+function countAttendance(selectedDate, status) {
+    if (attendanceData[selectedDate]) {
+        return Object.values(attendanceData[selectedDate]).filter((value) => value === status).length;
+    }
+    return 0;
+}
+
+
+--------------------------------------------------------------------------------
+Add a No of Present and Absent Student
+----------------------------------------
+
 // Add these lines at the beginning of script.js
 let presentCount = 0;
 let absentCount = 0;

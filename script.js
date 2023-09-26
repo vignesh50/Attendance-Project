@@ -1,4 +1,3 @@
-
 // Get a reference to the student list
 const studentList = document.getElementById("student-list");
 
