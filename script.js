@@ -14,6 +14,8 @@ function markAttendance(event) {
     const confirmation = confirm(`Mark ${studentName} as present?`);
     if (confirmation) {
         // You can add code here to record the attendance, e.g., send data to a server or store it in a local variable.
-        listItem.style.backgroundColor = "#c3e6cb"; // Change background color to indicate attendance marked
+        listItem.style.backgroundColor = "#A8DF8E"; // Change background color to indicate attendance marked
+    }else{
+        listItem.style.backgroundColor = "#FF6969"; // Change background color to indicate attendance marked
     }
 }
