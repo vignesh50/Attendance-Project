@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attendance App</title>
+    <title>Attendance WebApp</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -18,7 +18,16 @@
             <li><span class="student-name">Student 3</span> <button class="mark-attendance">Mark</button></li>
             <!-- Add more students as needed -->
         </ul>
+
+<!-- Add these lines below the student list in index.html -->
+<div>
+    <p>Students Present: <span id="present-count">0</span></p>
+    <p>Students Absent: <span id="absent-count">0</span></p>
+</div>
+
     </main>
+
+
     <script src="script.js"></script>
 </body>
 </html>
